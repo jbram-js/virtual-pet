@@ -1,0 +1,11 @@
+{
+  "name": "virtual-pet",
+  "version": "1.0.0",
+  "description": "My virtual pet",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Joseph Bramwell",
+  "license": "ISC"
+}
