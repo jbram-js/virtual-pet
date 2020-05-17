@@ -60,15 +60,17 @@ describe('growUp', () => {
   
       pet.fitness = 7;
       pet.walk();
-  
+
       expect(pet.fitness).toEqual(10);
-    });
-    it('increases fitness by 4 to a maximum of 10', () => {
-      const pet = new Pet('The puppy formerly known as Prince');
-  
+
       pet.fitness = 8;
       pet.walk();
-  
+
+      expect(pet.fitness).toEqual(10);
+
+      pet.fitness = 10;
+      pet.walk();
+
       expect(pet.fitness).toEqual(10);
     });
   });
@@ -87,16 +89,75 @@ describe('growUp', () => {
   
       pet.hunger = 2;
       pet.feed();
-  
+
       expect(pet.hunger).toEqual(0);
-    });
-    it('decreases hunger by 3 to a minimum of 0', () => {
-      const pet = new Pet('The puppy formerly known as Prince');
+  
   
       pet.hunger = 1;
       pet.feed();
-  
+      
       expect(pet.hunger).toEqual(0);
     });
   });
   
+  describe('checkUp', () => {
+    it('let owner know needs a walk when fitness is less than or equal to 3', () => {
+      const pet = new Pet('The puppy formerly known as Prince');
+
+      pet.fitness = 3;
+      pet.checkUp();
+
+      expect(pet.checkUp()).toEqual('I need a walk');
+
+      pet.fitness = 2;
+      pet.checkUp();
+
+      expect(pet.checkUp()).toEqual('I need a walk');
+    });
+
+    it('let owner know needs feeding when hunger is more than or equal to 5', () => {
+      const pet = new Pet('The puppy formerly known as Prince');
+
+      pet.hunger = 5;
+      pet.checkUp();
+
+      expect(pet.checkUp()).toEqual("I am hungry");
+
+      pet.hunger = 6;
+      pet.checkUp();
+
+      expect(pet.checkUp()).toEqual("I am hungry");
+  });
+
+    it('let owner know needs walking & feeding when fitness is less than or equal to 3 & hunger is more than or equal to 5', () => {
+      const pet = new Pet('The puppy formerly known as Prince');
+
+      pet.fitness = 3;
+      pet.hunger = 5;
+      pet.checkUp();
+
+      expect(pet.checkUp()).toBe('I am hungry AND I need a walk');
+      
+      pet.fitness = 2;
+      pet.hunger = 6;
+      pet.checkUp();
+
+      expect(pet.checkUp()).toBe('I am hungry AND I need a walk');
+    });
+
+    it('let owner know pet is great when fitness & hunger levels are correct', () => {
+      const pet = new Pet('The puppy formerly known as Prince');
+
+      pet.fitness = 4;
+      pet.hunger = 4;
+      pet.checkUp();
+
+      expect(pet.checkUp()).toBe('I feel great!');
+
+      pet.fitness = 5;
+      pet.hunger = 3;
+      pet.checkUp();
+
+      expect(pet.checkUp()).toBe('I feel great!');
+    });
+  });
