@@ -25,7 +25,7 @@ describe('constructor', () => {
 describe('growUp', () => {
     it('increments the age by 1', () => {
       const pet = new Pet('The puppy formerly known as Prince');
-  
+      
       pet.growUp();
   
       expect(pet.age).toEqual(1);
@@ -44,6 +44,16 @@ describe('growUp', () => {
   
       expect(pet.fitness).toEqual(7);
     }); 
+
+    it('throws an error if the pet is not alive', () => {
+      const pet = new Pet('The puppy formerly known as Prince');
+
+      pet.age = 30;
+      pet.hunger = 10;
+      pet.fitness = 0;
+
+      expect(() => pet.feed()).toThrow('Your pet is no longer alive :(');
+    });
   });
 
   describe('walk', () => {
@@ -55,6 +65,7 @@ describe('growUp', () => {
   
       expect(pet.fitness).toEqual(8);
     });
+    
     it('increases fitness by 4 to a maximum of 10', () => {
       const pet = new Pet('The puppy formerly known as Prince');
   
@@ -73,17 +84,28 @@ describe('growUp', () => {
 
       expect(pet.fitness).toEqual(10);
     });
+
+    it('throws an error if the pet is not alive', () => {
+      const pet = new Pet('The puppy formerly known as Prince');
+
+      pet.age = 30;
+      pet.hunger = 10;
+      pet.fitness = 0;
+
+      expect(() => pet.feed()).toThrow('Your pet is no longer alive :(');
+    });
   });
 
   describe('feed', () => {
     it('decreases hunger by 3', () => {
       const pet = new Pet('The puppy formerly known as Prince');
-  
-      pet.hunger = 15;
+      
+      pet.hunger = 9;
       pet.feed();
-  
-      expect(pet.hunger).toEqual(12);
+      
+      expect(pet.hunger).toEqual(6);
     });
+
     it('decreases hunger by 3 to a minimum of 0', () => {
       const pet = new Pet('The puppy formerly known as Prince');
   
@@ -97,6 +119,16 @@ describe('growUp', () => {
       pet.feed();
       
       expect(pet.hunger).toEqual(0);
+    });
+
+    it('throws an error if the pet is not alive', () => {
+      const pet = new Pet('The puppy formerly known as Prince');
+
+      pet.age = 30;
+      pet.hunger = 10;
+      pet.fitness = 0;
+
+      expect(() => pet.feed()).toThrow('Your pet is no longer alive :(');
     });
   });
   
@@ -159,5 +191,35 @@ describe('growUp', () => {
       pet.checkUp();
 
       expect(pet.checkUp()).toBe('I feel great!');
+    });
+  });
+
+  describe('isAlive', () => {
+    it('Checks if your pet is still alive', () => {
+      const pet = new Pet('The puppy formerly known as Prince');
+      pet.age = 31;
+      pet.hunger = 11;
+      pet.fitness = -1;
+     
+      expect(pet.isAlive).toBe(false);
+
+      pet.age = 30;
+      pet.hunger = 10;
+      pet.fitness = 0;
+      
+      expect(pet.isAlive).toBe(false);
+
+      pet.age = 29;
+      pet.hunger = 9;
+      pet.fitness = 1;
+
+      expect(pet.isAlive).toBe(true);
+
+      pet.age = 15;
+      pet.hunger = 5;
+      pet.fitness = 5;
+
+      expect(pet.isAlive).toBe(true);
+
     });
   });
