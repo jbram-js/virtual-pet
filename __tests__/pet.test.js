@@ -223,3 +223,27 @@ describe('growUp', () => {
 
     });
   });
+
+  describe('adoptChild', () => {
+    it('adopts/adds an existing Pet object to the parentPets children array property', () => {
+      const parentPet = new Pet('The puppy formerly known as Prince');
+      const childPet = new Pet('Prince Junior');
+
+      parentPet.adoptChild(childPet);
+
+      expect(parentPet.children).toBeInstanceOf(Array);
+      expect(parentPet.children[0]).toBe(childPet);
+    });
+});
+
+describe('haveBaby', () => {
+  it('when passed a name string it adds a new Pet object to the parents children array property', () => {
+  const parentPet = new Pet('The puppy formerly known as Prince');
+
+  parentPet.haveBaby('Prince Junior');
+
+  expect(parentPet.children).toBeInstanceOf(Array);
+  expect(parentPet.children[0]).toBeInstanceOf(Object);
+  expect(parentPet.children[0].name).toBe('Prince Junior');
+  });
+});
