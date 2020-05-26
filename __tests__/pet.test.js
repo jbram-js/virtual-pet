@@ -240,10 +240,10 @@ describe('haveBaby', () => {
   it('when passed a name string it adds a new Pet object to the parents children array property', () => {
   const parentPet = new Pet('The puppy formerly known as Prince');
 
-  parentPet.haveBaby('Prince Junior');
+  parentPet.haveBaby('Princess Junior');
 
   expect(parentPet.children).toBeInstanceOf(Array);
   expect(parentPet.children[0]).toBeInstanceOf(Object);
-  expect(parentPet.children[0].name).toBe('Prince Junior');
+  expect(parentPet.children[0].name).toBe('Princess Junior');
   });
 });
